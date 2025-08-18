@@ -5,7 +5,8 @@
     "password": "demo123",
     "role": "PATIENT",
     "createdAt": "2025-08-18T03:30:17.062Z",
-    "id": "1755487817064-jrcidk5ti"
+    "id": "1755487817064-jrcidk5ti",
+    "lastLogin": "2025-08-18T04:32:42.270Z"
   },
   {
     "email": "dr.researcher@demo.com",

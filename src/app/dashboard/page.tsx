@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useAuth } from "../lib/auth-context";
 import {
-  ArrowLeft,
+  Heart,
   BookOpen,
-  Clock,
-  CheckCircle,
-  PlayCircle,
-  Award,
-  Target,
   BarChart3,
+  TrendingUp,
+  Calendar,
+  Target,
+  Award,
+  ChevronRight,
+  LogOut,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import {
@@ -19,16 +21,16 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import {
-  educationModules,
-  calculateModuleProgress,
-} from "../lib/education-content";
+import { useRouter } from "next/navigation";
 
-export default function EducationPage() {
-  // Mock user progress - in real app this would come from database
-  const completedModules = ["diabetes-remission-basics"];
-  const currentModule = "low-energy-diet";
-  const overallProgress = calculateModuleProgress(completedModules);
+export default function DashboardPage() {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -36,271 +38,282 @@ export default function EducationPage() {
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
-                <Link href="/dashboard">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back
-                </Link>
-              </Button>
-              <div className="h-6 w-px bg-gray-300"></div>
-              <h1 className="text-xl font-semibold text-gray-900">
-                ReversePath Education Hub
-              </h1>
+            <div className="flex items-center space-x-2">
+              <Heart className="h-8 w-8 text-blue-600" />
+              <span className="text-2xl font-bold text-gray-900">
+                ReversePath
+              </span>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-600">
-                Progress: {overallProgress}% Complete
-              </div>
+              <span className="text-sm text-gray-600">
+                Welcome back, {user?.name || "User"}
+              </span>
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                S
+                {user?.name?.charAt(0) || "U"}
               </div>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
             </div>
           </div>
         </div>
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Progress Overview */}
-        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-8 text-white mb-8">
-          <h2 className="text-3xl font-bold mb-4">Your Learning Journey</h2>
-          <p className="text-green-100 text-lg mb-6">
-            Master the knowledge you need for successful diabetes remission
+        {/* Welcome Section */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 text-white mb-8">
+          <h1 className="text-3xl font-bold mb-2">Your Remission Journey</h1>
+          <p className="text-blue-100 text-lg mb-4">
+            Day 15 of your 12-week program
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/20 rounded-lg p-4">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-8 w-8" />
-                <div>
-                  <div className="text-2xl font-bold">
-                    {completedModules.length}
-                  </div>
-                  <div className="text-sm opacity-90">Modules Completed</div>
-                </div>
-              </div>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-2">
+              <Target className="h-5 w-5" />
+              <span>Target: HbA1c &lt; 6.5%</span>
             </div>
-
-            <div className="bg-white/20 rounded-lg p-4">
-              <div className="flex items-center space-x-3">
-                <Target className="h-8 w-8" />
-                <div>
-                  <div className="text-2xl font-bold">{overallProgress}%</div>
-                  <div className="text-sm opacity-90">Overall Progress</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/20 rounded-lg p-4">
-              <div className="flex items-center space-x-3">
-                <Award className="h-8 w-8" />
-                <div>
-                  <div className="text-2xl font-bold">85%</div>
-                  <div className="text-sm opacity-90">Average Quiz Score</div>
-                </div>
-              </div>
+            <div className="flex items-center space-x-2">
+              <TrendingUp className="h-5 w-5" />
+              <span>Progress: On track</span>
             </div>
           </div>
         </div>
 
-        {/* Learning Modules */}
-        <div className="mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Learning Modules
-          </h3>
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Today's Glucose</p>
+                  <p className="text-2xl font-bold text-gray-900">124 mg/dL</p>
+                </div>
+                <div className="bg-green-100 p-2 rounded-full">
+                  <TrendingUp className="h-6 w-6 text-green-600" />
+                </div>
+              </div>
+              <p className="text-sm text-green-600 mt-2">
+                ↓ 15% from last week
+              </p>
+            </CardContent>
+          </Card>
 
-          <div className="grid gap-6">
-            {educationModules.map((module, index) => {
-              const isCompleted = completedModules.includes(module.id);
-              const isCurrent = currentModule === module.id;
-              const isLocked =
-                !isCompleted &&
-                !isCurrent &&
-                index > 0 &&
-                !completedModules.includes(educationModules[index - 1].id);
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Calories Today</p>
+                  <p className="text-2xl font-bold text-gray-900">750</p>
+                </div>
+                <div className="bg-blue-100 p-2 rounded-full">
+                  <Target className="h-6 w-6 text-blue-600" />
+                </div>
+              </div>
+              <p className="text-sm text-blue-600 mt-2">50 under target</p>
+            </CardContent>
+          </Card>
 
-              return (
-                <Card
-                  key={module.id}
-                  className={`transition-all duration-200 ${
-                    isCompleted
-                      ? "border-green-200 bg-green-50"
-                      : isCurrent
-                      ? "border-blue-200 bg-blue-50 shadow-md"
-                      : isLocked
-                      ? "border-gray-200 bg-gray-100 opacity-60"
-                      : "border-gray-200 hover:shadow-md"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      {/* Module Icon */}
-                      <div
-                        className={`p-3 rounded-full ${
-                          isCompleted
-                            ? "bg-green-100"
-                            : isCurrent
-                            ? "bg-blue-100"
-                            : "bg-gray-100"
-                        }`}
-                      >
-                        {isCompleted ? (
-                          <CheckCircle className="h-8 w-8 text-green-600" />
-                        ) : isCurrent ? (
-                          <PlayCircle className="h-8 w-8 text-blue-600" />
-                        ) : (
-                          <BookOpen className="h-8 w-8 text-gray-400" />
-                        )}
-                      </div>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Weight Loss</p>
+                  <p className="text-2xl font-bold text-gray-900">8.2 kg</p>
+                </div>
+                <div className="bg-purple-100 p-2 rounded-full">
+                  <Award className="h-6 w-6 text-purple-600" />
+                </div>
+              </div>
+              <p className="text-sm text-purple-600 mt-2">Great progress!</p>
+            </CardContent>
+          </Card>
 
-                      {/* Module Content */}
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center space-x-3">
-                            <h4 className="text-xl font-semibold text-gray-900">
-                              Module {module.order}: {module.title}
-                            </h4>
-                            {isCompleted && (
-                              <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                Completed
-                              </span>
-                            )}
-                            {isCurrent && (
-                              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                In Progress
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center text-sm text-gray-500">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {module.duration} min
-                          </div>
-                        </div>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Learning Progress</p>
+                  <p className="text-2xl font-bold text-gray-900">85%</p>
+                </div>
+                <div className="bg-orange-100 p-2 rounded-full">
+                  <BookOpen className="h-6 w-6 text-orange-600" />
+                </div>
+              </div>
+              <p className="text-sm text-orange-600 mt-2">
+                2 modules remaining
+              </p>
+            </CardContent>
+          </Card>
+        </div>
 
-                        <p className="text-gray-600 mb-4">
-                          {module.description}
-                        </p>
-
-                        {/* Learning Objectives */}
-                        <div className="mb-4">
-                          <h5 className="text-sm font-medium text-gray-900 mb-2">
-                            Learning Objectives:
-                          </h5>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {module.learningObjectives
-                              .slice(0, 2)
-                              .map((objective, objIndex) => (
-                                <li key={objIndex} className="flex items-start">
-                                  <span className="text-blue-500 mr-2">•</span>
-                                  {objective}
-                                </li>
-                              ))}
-                            {module.learningObjectives.length > 2 && (
-                              <li className="text-gray-500 italic">
-                                +{module.learningObjectives.length - 2} more
-                                objectives...
-                              </li>
-                            )}
-                          </ul>
-                        </div>
-
-                        {/* Action Button */}
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center space-x-4">
-                            {isCompleted && (
-                              <div className="flex items-center text-sm text-green-600">
-                                <Award className="h-4 w-4 mr-1" />
-                                Quiz Score: 92%
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="flex space-x-2">
-                            {isCompleted && (
-                              <Button variant="outline" size="sm">
-                                Review
-                              </Button>
-                            )}
-                            {(isCurrent || isCompleted) && (
-                              <Button
-                                size="sm"
-                                className={
-                                  isCompleted
-                                    ? "bg-green-600 hover:bg-green-700"
-                                    : ""
-                                }
-                              >
-                                {isCompleted ? "Retake" : "Continue"} Module
-                              </Button>
-                            )}
-                            {isLocked && (
-                              <Button variant="outline" size="sm" disabled>
-                                Locked
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Main Actions */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Today's Tasks */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Today's Tasks</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-green-800">
+                        Morning glucose reading
+                      </span>
                     </div>
+                    <span className="text-sm text-green-600">Completed</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="text-gray-800">Log lunch meal</span>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <span className="text-gray-800">
+                        Complete Module 3: Meal Planning
+                      </span>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card className="border-l-4 border-l-blue-500 hover:shadow-md transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <BarChart3 className="h-8 w-8 text-blue-600 mb-3" />
+                  <CardTitle className="text-lg mb-2">Track Health</CardTitle>
+                  <CardDescription>
+                    Log glucose, meals, and weight
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Link href="/dashboard/education">
+                <Card className="border-l-4 border-l-green-500 hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-6">
+                    <BookOpen className="h-8 w-8 text-green-600 mb-3" />
+                    <CardTitle className="text-lg mb-2">Learn</CardTitle>
+                    <CardDescription>
+                      Interactive modules and quizzes
+                    </CardDescription>
                   </CardContent>
                 </Card>
-              );
-            })}
+              </Link>
+
+              <Card className="border-l-4 border-l-purple-500 hover:shadow-md transition-shadow cursor-pointer">
+                <CardContent className="p-6">
+                  <TrendingUp className="h-8 w-8 text-purple-600 mb-3" />
+                  <CardTitle className="text-lg mb-2">Progress</CardTitle>
+                  <CardDescription>
+                    View trends and achievements
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
 
-        {/* Additional Resources */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <BarChart3 className="h-5 w-5 mr-2 text-blue-600" />
-                Progress Tracking
-              </CardTitle>
-              <CardDescription>
-                Monitor your learning journey and quiz performance
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="outline" className="w-full">
-                View Detailed Progress
-              </Button>
-            </CardContent>
-          </Card>
+          {/* Right Column - Recent Activity */}
+          <div className="space-y-6">
+            {/* Recent Achievements */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Achievements</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="bg-yellow-100 p-2 rounded-full">
+                      <Award className="h-4 w-4 text-yellow-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Week 2 Complete</p>
+                      <p className="text-xs text-gray-600">
+                        Consistent tracking
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="bg-green-100 p-2 rounded-full">
+                      <Target className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Glucose Target</p>
+                      <p className="text-xs text-gray-600">5 days in range</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="bg-blue-100 p-2 rounded-full">
+                      <BookOpen className="h-4 w-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Learning Streak</p>
+                      <p className="text-xs text-gray-600">7 days active</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <BookOpen className="h-5 w-5 mr-2 text-green-600" />
-                Study Resources
-              </CardTitle>
-              <CardDescription>
-                Download guides, meal plans, and tracking sheets
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="outline" className="w-full">
-                Download Resources
-              </Button>
-            </CardContent>
-          </Card>
+            {/* Upcoming */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Upcoming</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Calendar className="h-4 w-4 text-gray-400" />
+                    <div>
+                      <p className="text-sm font-medium">Research Check-in</p>
+                      <p className="text-xs text-gray-600">Tomorrow, 2:00 PM</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <BookOpen className="h-4 w-4 text-gray-400" />
+                    <div>
+                      <p className="text-sm font-medium">
+                        New Module Available
+                      </p>
+                      <p className="text-xs text-gray-600">
+                        Exercise & Diabetes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Award className="h-5 w-5 mr-2 text-purple-600" />
-                Achievements
-              </CardTitle>
-              <CardDescription>
-                Earn badges and certificates for your progress
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="outline" className="w-full">
-                View Achievements
-              </Button>
-            </CardContent>
-          </Card>
+            {/* Quick Access */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Access</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Link href="/admin/dashboard">
+                  <Button variant="outline" className="w-full justify-start">
+                    <BarChart3 className="h-4 w-4 mr-2" />
+                    {user?.role === "RESEARCHER" || user?.role === "ADMIN"
+                      ? "Research Dashboard"
+                      : "View Research Data"}
+                  </Button>
+                </Link>
+                <Button variant="outline" className="w-full justify-start">
+                  <Target className="h-4 w-4 mr-2" />
+                  Export My Data
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

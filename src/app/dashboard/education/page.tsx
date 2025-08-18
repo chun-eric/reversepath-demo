@@ -23,8 +23,10 @@ import {
   educationModules,
   calculateModuleProgress,
 } from "../../lib/education-content";
+import { useAuth } from "../../lib/auth-context";
 
 export default function EducationPage() {
+  const { user } = useAuth(); // Add this line
   // Mock user progress - in real app this would come from database
   const completedModules = ["diabetes-remission-basics"];
   const currentModule = "low-energy-diet";
@@ -53,7 +55,7 @@ export default function EducationPage() {
                 Progress: {overallProgress}% Complete
               </div>
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                S
+                {user?.name?.charAt(0) || "U"}
               </div>
             </div>
           </div>
