@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "../../src/app/components/ui/card";
 import "../app/lib/init-data";
+import { User } from "../app/lib/auth-context";
 
 export default function HomePage() {
   return (
@@ -19,7 +20,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Heart className="h-8 w-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">
+              <span className="hidden md:inline-flex text-xl font-bold text-gray-900">
                 ReversePath
               </span>
             </div>
