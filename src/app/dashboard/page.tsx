@@ -299,14 +299,14 @@ export default function DashboardPage() {
                 <CardTitle>Quick Access</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Link href="/admin/dashboard">
+                {/* <Link href="/admin/dashboard">
                   <Button variant="outline" className="w-full justify-start">
                     <BarChart3 className="h-4 w-4 mr-2" />
                     {user?.role === "RESEARCHER" || user?.role === "ADMIN"
                       ? "Research Dashboard"
                       : "View Research Data"}
                   </Button>
-                </Link>
+                </Link> */}
                 <Button variant="outline" className="w-full justify-start">
                   <Target className="h-4 w-4 mr-2" />
                   Export My Data
