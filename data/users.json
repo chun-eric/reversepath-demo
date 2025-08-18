@@ -1,0 +1,26 @@
+[
+  {
+    "email": "sarah.patient@demo.com",
+    "name": "Sarah Mitchell",
+    "password": "demo123",
+    "role": "PATIENT",
+    "createdAt": "2025-08-18T03:30:17.062Z",
+    "id": "1755487817064-jrcidk5ti"
+  },
+  {
+    "email": "dr.researcher@demo.com",
+    "name": "Dr. Emily Research",
+    "password": "demo123",
+    "role": "RESEARCHER",
+    "createdAt": "2025-08-18T03:30:17.065Z",
+    "id": "1755487817065-fhr5iyuu2"
+  },
+  {
+    "email": "admin@demo.com",
+    "name": "Admin User",
+    "password": "demo123",
+    "role": "ADMIN",
+    "createdAt": "2025-08-18T03:30:17.066Z",
+    "id": "1755487817067-zyabinn7z"
+  }
+]

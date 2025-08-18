@@ -1,0 +1,99 @@
+
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DIRECT_URL")
+  
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(PATIENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Patient-specific data
+  glucoseReadings GlucoseReading[]
+  mealLogs        MealLog[]
+  moduleProgress  ModuleProgress[]
+
+  @@map("users")
+}
+
+model GlucoseReading {
+  id        String   @id @default(cuid())
+  userId    String
+  value     Float    // mg/dL
+  timestamp DateTime @default(now())
+  notes     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("glucose_readings")
+}
+
+model MealLog {
+  id          String   @id @default(cuid())
+  userId      String
+  mealType    MealType
+  foodName    String
+  calories    Int
+  carbs       Float?
+  protein     Float?
+  fat         Float?
+  timestamp   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("meal_logs")
+}
+
+model EducationModule {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  content     Json     // Rich content with quizzes, videos, etc.
+  order       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  progress ModuleProgress[]
+
+  @@map("education_modules")
+}
+
+model ModuleProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  moduleId      String
+  completed     Boolean  @default(false)
+  score         Int?     // Quiz score
+  completedAt   DateTime?
+  timeSpent     Int?     // Minutes
+
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module EducationModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, moduleId])
+  @@map("module_progress")
+}
+
+enum UserRole {
+  PATIENT
+  RESEARCHER
+  ADMIN
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "userId": "1755487817064-jrcidk5ti",
+    "action": "login",
+    "resource": "authentication",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2025-08-18T03:30:17.073Z",
+    "id": "1755487817074-f13sy1xck"
+  },
+  {
+    "userId": "1755487817064-jrcidk5ti",
+    "action": "view",
+    "resource": "education_dashboard",
+    "details": {
+      "duration": 300
+    },
+    "timestamp": "2025-08-18T03:30:17.075Z",
+    "id": "1755487817075-mo3s5xsf3"
+  },
+  {
+    "userId": "1755487817064-jrcidk5ti",
+    "action": "complete",
+    "resource": "education_module_1",
+    "details": {
+      "score": 92,
+      "timeSpent": 900
+    },
+    "timestamp": "2025-08-18T03:30:17.076Z",
+    "id": "1755487817076-wpt2numcq"
+  }
+]
