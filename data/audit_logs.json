@@ -49,5 +49,15 @@
     },
     "timestamp": "2025-08-18T04:32:42.270Z",
     "id": "1755491562271-2iuz9lje6"
+  },
+  {
+    "userId": "demo-patient-1",
+    "action": "login",
+    "resource": "authentication",
+    "details": {
+      "success": true
+    },
+    "timestamp": "2025-08-20T11:32:35.484Z",
+    "id": "1755689555485-t5dthaoho"
   }
 ]

@@ -224,16 +224,20 @@ export default function EducationPage() {
                               </Button>
                             )}
                             {(isCurrent || isCompleted) && (
-                              <Button
-                                size="sm"
-                                className={
-                                  isCompleted
-                                    ? "bg-green-600 hover:bg-green-700"
-                                    : ""
-                                }
+                              <Link
+                                href={`/education-modules/module-${module.order}/story.html`}
                               >
-                                {isCompleted ? "Retake" : "Continue"} Module
-                              </Button>
+                                <Button
+                                  size="sm"
+                                  className={
+                                    isCompleted
+                                      ? "bg-green-600 hover:bg-green-700"
+                                      : ""
+                                  }
+                                >
+                                  {isCompleted ? "Retake" : "Continue"} Module
+                                </Button>
+                              </Link>
                             )}
                             {isLocked && (
                               <Button variant="outline" size="sm" disabled>
