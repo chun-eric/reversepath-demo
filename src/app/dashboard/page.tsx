@@ -34,32 +34,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Heart className="h-8 w-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">
-                ReversePath
-              </span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                Welcome back, {user?.name || "User"}
-              </span>
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                {user?.name?.charAt(0) || "U"}
-              </div>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 text-white mb-8">
@@ -187,16 +161,18 @@ export default function DashboardPage() {
             </Card>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="border-l-4 border-l-blue-500 hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-6">
-                  <BarChart3 className="h-8 w-8 text-blue-600 mb-3" />
-                  <CardTitle className="text-lg mb-2">Track Health</CardTitle>
-                  <CardDescription>
-                    Log glucose, meals, and weight
-                  </CardDescription>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1  gap-4">
+              <Link href="/dashboard/tracking">
+                <Card className="border-l-4 border-l-blue-500 hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-6">
+                    <BarChart3 className="h-8 w-8 text-blue-600 mb-3" />
+                    <CardTitle className="text-lg mb-2">Track Health</CardTitle>
+                    <CardDescription>
+                      Log glucose, meals, and weight
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
 
               <Link href="/dashboard/education">
                 <Card className="border-l-4 border-l-green-500 hover:shadow-md transition-shadow cursor-pointer">
@@ -210,15 +186,17 @@ export default function DashboardPage() {
                 </Card>
               </Link>
 
-              <Card className="border-l-4 border-l-purple-500 hover:shadow-md transition-shadow cursor-pointer">
-                <CardContent className="p-6">
-                  <TrendingUp className="h-8 w-8 text-purple-600 mb-3" />
-                  <CardTitle className="text-lg mb-2">Progress</CardTitle>
-                  <CardDescription>
-                    View trends and achievements
-                  </CardDescription>
-                </CardContent>
-              </Card>
+              <Link href="/dashboard/progress">
+                <Card className="border-l-4 border-l-purple-500 hover:shadow-md transition-shadow cursor-pointer">
+                  <CardContent className="p-6">
+                    <TrendingUp className="h-8 w-8 text-purple-600 mb-3" />
+                    <CardTitle className="text-lg mb-2">Progress</CardTitle>
+                    <CardDescription>
+                      View trends and achievements
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
             </div>
           </div>
 

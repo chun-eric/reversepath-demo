@@ -4,6 +4,9 @@ import "./globals.css";
 import "../app/lib/init-data";
 import { AuthProvider } from "../app/lib/auth-context";
 
+import Navbar from "../app/components/layout/Navbar";
+import Footer from "../app/components/layout/Footer";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,7 +38,9 @@ export default function RootLayout({
         {" "}
         <AuthProvider>
           <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+            <Navbar />
             {children}
+            <Footer />
           </div>
         </AuthProvider>
       </body>

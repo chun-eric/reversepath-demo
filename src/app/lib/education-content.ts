@@ -31,7 +31,7 @@ export const educationModules: EducationModule[] = [
     title: "Understanding Diabetes Remission",
     description:
       "Learn the science behind Type 2 diabetes reversal and what remission means for your health.",
-    duration: 15,
+    duration: 5,
     order: 1,
     learningObjectives: [
       "Understand what diabetes remission means",

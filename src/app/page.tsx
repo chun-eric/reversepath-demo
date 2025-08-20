@@ -10,32 +10,12 @@ import {
 } from "../../src/app/components/ui/card";
 import "../app/lib/init-data";
 import { User } from "../app/lib/auth-context";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Heart className="h-8 w-8 text-blue-600" />
-              <span className="hidden md:inline-flex text-xl font-bold text-gray-900">
-                ReversePath
-              </span>
-            </div>
-            <div className="flex space-x-4">
-              <Button variant="ghost">
-                <Link href="/login">Sign In</Link>
-              </Button>
-              <Button>
-                <Link href="/dashboard">Get Started</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -153,44 +133,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-start justify-between">
-            <div className="flex flex-col gap-x-20 items-left space-x-2 max-w-[30%]">
-              <div className="flex gap-2 mb-2">
-                <Heart className="h-6 w-6" />
-                <span className="text-lg font-semibold">ReversePath</span>
-              </div>
-              <div className="text-sm text-gray-400 ml-2 ">
-                Supporting diabetes remission through digital innovation
-              </div>
-            </div>
-
-            <div className="flex flex-col text-xs gap-4 max-w-[40%] text-gray-400 mt-2 ">
-              <Link href="/privacy" className="hover:text-gray-200">
-                Privacy Policy
-              </Link>
-              <Link href="/data-protection" className="hover:text-gray-200">
-                Data Protection
-              </Link>
-              <Link href="/contact" className="hover:text-gray-200">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-xs text-gray-400">
-            <p>
-              2025. Telehealth E-learning platform developed for University of
-              Sydney diabetes remission study
-            </p>
-            <p className="mt-2 ">
-              Built with accessibility and evidence-based care in mind
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
