@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, ArrowLeft, Shield, Eye, FileText, Users } from "lucide-react";
+import { Shield, Eye, FileText, Users } from "lucide-react";
 import {
   Card,
   CardContent,
