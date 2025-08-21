@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, BarChart3, BookOpen, Users } from "lucide-react";
+import { Heart } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -20,8 +20,8 @@ export default function Footer() {
             <Link href="/privacy" className="hover:text-gray-200">
               Privacy Policy
             </Link>
-            <Link href="/data-protection" className="hover:text-gray-200">
-              Data Protection
+            <Link href="/terms" className="hover:text-gray-200">
+              Terms & Conditions
             </Link>
             <Link href="/contact" className="hover:text-gray-200">
               Contact Us
