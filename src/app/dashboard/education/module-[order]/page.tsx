@@ -1,6 +1,9 @@
 // import { StorylineModule } from "@/app/components/education/StorylineModule";
 
-export default function Module1Page() {
+// Add this export to disable static generation
+export const dynamic = "force-dynamic";
+
+export default function Module1Page({ params }: { params: { order: string } }) {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">

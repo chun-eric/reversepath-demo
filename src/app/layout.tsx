@@ -6,6 +6,7 @@ import { AuthProvider } from "../app/lib/auth-context";
 
 import Navbar from "../app/components/layout/Navbar";
 import Footer from "../app/components/layout/Footer";
+import ConditionalLayout from "./components/layout/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,9 +39,7 @@ export default function RootLayout({
         {" "}
         <AuthProvider>
           <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
-            <Navbar />
-            {children}
-            <Footer />
+            <ConditionalLayout>{children}</ConditionalLayout>
           </div>
         </AuthProvider>
       </body>
