@@ -23,6 +23,9 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-gray-200">
               Terms & Conditions
             </Link>
+            {/* <Link href="/consent" className="hover:text-gray-200">
+              Consent Management
+            </Link> */}
             <Link href="/contact" className="hover:text-gray-200">
               Contact Us
             </Link>

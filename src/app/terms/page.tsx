@@ -574,12 +574,10 @@ export default function TermsOfServicePage() {
                 <Link href="/privacy">Privacy Policy</Link>
               </Button>
               <Button variant="outline">
-                <Link href="/consent">Consent Management</Link>
+                <Link href="/terms">Terms of Service</Link>
               </Button>
               <Button>
-                <Link href="mailto:reversepath@sydney.edu.au">
-                  Contact Legal Team
-                </Link>
+                <Link href="mailto:reversepath@sydney.edu.au">Contact Us</Link>
               </Button>
             </div>
             <p className="text-sm text-gray-600 mt-4">
