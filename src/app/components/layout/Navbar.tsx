@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { useRouter, usePathname } from "next/navigation";
+import { ArrowLeft, Shield, Eye, FileText, Users } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -38,16 +39,29 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo - Always Present */}
-          <div className="flex items-center space-x-2">
-            <Link
-              href={isAuthenticated ? "/dashboard" : "/"}
-              className="flex items-center space-x-2"
-            >
-              <Heart className="h-8 w-8 text-blue-600" />
-              <span className="hidden md:inline-flex text-xl font-bold text-gray-900">
-                ReversePath
-              </span>
-            </Link>
+          <div className="flex items-center space-x-4 w-30">
+            <div>
+              <Link
+                href={isAuthenticated ? "/dashboard" : "/"}
+                className="flex items-center space-x-2"
+              >
+                <Heart className="h-8 w-8 text-blue-600" />
+                <span className="hidden md:inline-flex text-xl font-bold text-gray-900">
+                  ReversePath
+                </span>
+              </Link>
+            </div>
+            {/* Privacy Protected - Only show on privacy page */}
+            <div className="">
+              {pathname === "/privacy" && (
+                <div className="flex items-center space-x-2 px-3 py-2 rounded-md bg-green-50">
+                  <Shield className="h-5 w-5 text-green-600" />
+                  <span className="text-sm text-green-600 font-medium">
+                    Privacy Protected
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Center Navigation - Adapts based on current section */}
@@ -230,6 +244,22 @@ export default function Navbar() {
             </div>
           </div>
         )}
+
+        {/* Privacy */}
+        <div className="hidden md:flex items-center space-x-4">
+          <Link
+            href="/privacy"
+            className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium
+              ${pathname === "/privacy"}`}
+          >
+            <div className="flex items-center space-x-2">
+              <Shield className="h-5 w-5 text-green-600" />
+              <span className="text-sm text-green-600 font-medium">
+                Privacy Protected
+              </span>
+            </div>
+          </Link>
+        </div>
       </div>
     </nav>
   );
