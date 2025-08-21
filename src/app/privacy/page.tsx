@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Shield, Eye, FileText, Users } from "lucide-react";
 import {
