@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { useRouter, usePathname } from "next/navigation";
-import { ArrowLeft, Shield, Eye, FileText, Users } from "lucide-react";
+import { Shield } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -50,17 +50,6 @@ export default function Navbar() {
                   ReversePath
                 </span>
               </Link>
-            </div>
-            {/* Privacy Protected - Only show on privacy page */}
-            <div className="">
-              {pathname === "/privacy" && (
-                <div className="flex items-center space-x-2 px-3 py-2 rounded-md bg-green-50">
-                  <Shield className="h-5 w-5 text-green-600" />
-                  <span className="text-sm text-green-600 font-medium">
-                    Privacy Protected
-                  </span>
-                </div>
-              )}
             </div>
           </div>
 
@@ -244,22 +233,6 @@ export default function Navbar() {
             </div>
           </div>
         )}
-
-        {/* Privacy */}
-        <div className="hidden md:flex items-center space-x-4">
-          <Link
-            href="/privacy"
-            className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium
-              ${pathname === "/privacy"}`}
-          >
-            <div className="flex items-center space-x-2">
-              <Shield className="h-5 w-5 text-green-600" />
-              <span className="text-sm text-green-600 font-medium">
-                Privacy Protected
-              </span>
-            </div>
-          </Link>
-        </div>
       </div>
     </nav>
   );
